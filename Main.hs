@@ -3,6 +3,7 @@ import Data.Fixed
 import System.Random
 
 import Fluid
+import FromFile
 import Settings
 import Simulation
 import Svg
@@ -38,8 +39,12 @@ state = [[
 seed :: Int
 seed = 101
 
-fileName :: String
-fileName = "test16.svg"
+inputFile :: String
+inputFile = "input1.txt"
+
+outputFile :: String
+outputFile = "test17.svg"
+
 
 -- getMaxPressure :: FluidMatrix -> Float
 -- getMaxPressure fm = foldl max 0 [foldl max 0 [getPressure cell | cell <- row] | row <- fm]
@@ -48,10 +53,18 @@ fileName = "test16.svg"
 main = do
         let res = simulate state water wall deltaTime timeSteps
         let out = drawFluid cellSize (deltaTime * fromIntegral(timeSteps)) res
-        writeFile fileName $ (surroundWithHeader out)
+        writeFile outputFile $ (surroundWithHeader out)
 
         putStrLn ""
 
+mainFromFile = do
+    file <- readFile inputFile
+    let state = fromString file
+    let res = simulate state water wall deltaTime timeSteps
+    let out = drawFluid cellSize (deltaTime * fromIntegral(timeSteps)) res
+    writeFile outputFile $ (surroundWithHeader out)
+
+    putStrLn ""
 
 
 randomFluidMatrix :: Int ->   -- ^The seed

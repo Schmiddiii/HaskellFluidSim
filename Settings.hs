@@ -23,7 +23,7 @@ cellSize :: (Float, Float)
 cellSize = (10,10)
 
 maxPressure :: Float
-maxPressure = 0.15
+maxPressure = 0.3
 
 deltaTime :: Float
 deltaTime = 0.5
