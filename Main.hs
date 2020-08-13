@@ -12,10 +12,10 @@ import Svg
 import Types
 
 inputFile :: String
-inputFile = "Tests/inputCircle.txt"
+inputFile = "Tests/inputHole.txt"
 
 outputFile :: String
-outputFile = "Tests/outputCircle.svg"
+outputFile = "Tests/outputHole.svg"
 
 main = do
     file <- readFile inputFile
