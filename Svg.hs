@@ -33,7 +33,7 @@ mkAnim :: String -> -- ^The attribute name
 mkAnim attName beg dur val = "<animate attributeName='"++attName++
                              "' begin='"++(show beg)++
                              "s' dur='"++(show dur)++
-                             "s' values='"++concat [(show v)++";" | v<-val]++"' />"
+                             "s' values='"++concat [(show v)++";" | v<-val]++"' repeatCount='indefinite' />"
 
 
 drawFluid :: (Float, Float) -> -- ^Size of a cell, width then height
