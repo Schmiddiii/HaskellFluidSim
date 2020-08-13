@@ -8,27 +8,24 @@ import NeighborMatrix
 simulate :: FluidMatrix ->               -- ^The beginning state
             Fluid ->                     -- ^The fluid
             Wall ->                      -- ^The wall
-            Float ->                     -- ^The delta time
             Int ->                       -- ^The number of timesteps
             FluidMatrixTime Fluid Wall
-simulate state fluid wall delta steps = simulateRec (FluidMatrixTime [state] fluid wall) delta steps
+simulate state fluid wall steps = simulateRec (FluidMatrixTime [state] fluid wall) steps
 
 
 simulateRec :: FluidMatrixTime Fluid Wall -> -- ^The already computed time
-               Float ->                      -- ^The delta time
                Int ->                        -- ^The number of timesteps
                FluidMatrixTime Fluid Wall
-simulateRec fm _ 0 = fm
-simulateRec (FluidMatrixTime states fluid wall) delta step =
-    simulateRec (FluidMatrixTime (states ++ [simulateOne (states!!((length states)-1)) fluid delta]) fluid wall) delta (step-1)
+simulateRec fm 0 = fm
+simulateRec (FluidMatrixTime states fluid wall) step =
+    simulateRec (FluidMatrixTime (states ++ [simulateOne (states!!((length states)-1)) fluid]) fluid wall) (step-1)
 
 
 
 simulateOne :: FluidMatrix ->  -- ^The previous state
                Fluid ->        -- ^The used fluid
-               Float ->        -- ^The delta time
                FluidMatrix
-simulateOne fm fluid _ = flow (collision fm fluid)
+simulateOne fm fluid = flow (collision fm fluid)
 
 
 {-flow :: FluidMatrix -> FluidMatrix

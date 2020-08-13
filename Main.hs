@@ -12,15 +12,15 @@ import Svg
 import Types
 
 inputFile :: String
-inputFile = "inputCircle.txt"
+inputFile = "inputBarriers.txt"
 
 outputFile :: String
-outputFile = "outputCircle.svg"
+outputFile = "outputBarriers.svg"
 
 main = do
     file <- readFile inputFile
     let state = fromString file
-    let res = simulate state water wall deltaTime timeSteps
+    let res = simulate state water wall timeSteps
     let out = drawFluid cellSize (deltaTime * fromIntegral(timeSteps)) res
     writeFile outputFile $ (surroundWithHeader out)
 
