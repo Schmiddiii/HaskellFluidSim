@@ -13,6 +13,7 @@ getWallColor :: Wall -> Color
 getWallColor (Wall c) = c
 
 getPressure :: GridElem -> Float
-getPressure (FluidElem a) = (foldl (\x y->x+y) 0 a)/(fromIntegral (length a))
+getPressure (FluidElem (n0, n1, n2, n3, n4, n5, n6, n7)) = (n0+n1+n2+n3+n4+n5+n6+n7)/(fromIntegral 8)
 getPressure (WallElem) = maxPressure
+
 
